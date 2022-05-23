@@ -1,0 +1,148 @@
+<div class="container-fluid">
+    <div class="row mt-3">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+            Filter Options: Companies
+          </div>
+          <div class="card-body">
+            <form [formGroup]="searchForm">
+              <div class="form-group offset-2">
+                <div class="row mt-2">
+                  <div class="col-2">
+                    <label>Name:</label>
+                  </div>
+                  <div class="col-6">
+                    <input type="text" class="form-control" formControlName="searchText" id="searchText" aria-describedby="searchText" placeholder="Name">
+                  </div>
+                </div>
+                <div class="row mt-4">
+                  <div class="col-2">
+                    <label>Company:</label>
+                  </div>
+                  <div class="col-6">
+                    <input type="text" class="form-control" id="company" aria-describedby="company" placeholder="Company">
+                  </div>
+                </div>
+                <div class="row mt-4">
+                  <div class="col-2">
+                    <label>Can Login:</label>
+                  </div>
+                  <div class="col-6">
+                    <select class="custom-select">
+                        <option selected disabled>Select Option</option>
+                        <option value="1">Yes</option>
+                        <option value="2">No</option>
+                      </select>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="card-footer">
+            <div class="text-center">
+                <button class="btn btn-secondary mr-2" (click)="search()">Search</button>
+                <button class="btn btn-secondary" (click)="resetText()">Reset</button>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-3">
+      <div class="card">
+        <div class="card-header">
+          <div class="text-right inline">
+            <button class="btn btn-light" data-toggle="modal" data-target="#createModal">
+              <i class="fa fa-plus fa-sm"></i>
+              Add</button>
+            <button class="btn btn-light" (click)="exportToCsv()">
+              <i class="fa fa-download fa-sm"></i>
+              Export</button>
+          </div>
+        </div>
+        <div class="card-body">
+          <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>ContactNumber</th>
+                <th>Registration No.</th>
+                <th>Active</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let result of results">
+                <td>{{result.id}}</td>
+                <td>{{result.name}}</td>
+                <td>{{result.contactNumber}}</td>
+                <td>{{result.registrationNumber}}</td>
+                <td>{{statusFilter(result.active)}}</td>
+                <td class="row">
+                  <div class="inline">
+                    <button class="btn btn-success" data-toggle="modal" data-target="#createModal" (click)="onChange(result)">Edit</button>
+                    <button class="btn btn-danger" (click)="deleteCompany(result)">Delete</button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="createModal" tabindex="-1" data-backdrop="false" role="dialog" aria-labelledby="createModalLabel" aria-hidden="true">
+    <form [formGroup]="createForm" (ngSubmit)="createCompany()">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Basic Info</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="form-row">
+              <div class="form-group col-3">
+                <label>Name:</label>
+              </div>
+              <div class="form-group col-9"> 
+                <input type="text" formControlName="name" class="form-control" />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-3">
+                <label>Contact No.:</label>
+              </div>
+              <div class="form-group col-9"> 
+                <input type="text" formControlName="contactNumber" class="form-control" />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-3">
+                <label>Registration No.:</label>
+              </div>
+              <div class="form-group col-9"> 
+                <input type="text" formControlName="registrationNumber" class="form-control"/>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-3">
+                <label>Active:</label>
+              </div>
+              <div class="form-group col-9"> 
+                <input type="checkbox" formControlName="active" />
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="createCompany()">Save</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
