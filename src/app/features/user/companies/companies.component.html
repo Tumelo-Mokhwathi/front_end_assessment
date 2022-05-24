@@ -6,14 +6,13 @@
             Filter Options: Companies
           </div>
           <div class="card-body">
-            <form [formGroup]="searchForm">
               <div class="form-group offset-2">
                 <div class="row mt-2">
                   <div class="col-2">
                     <label>Name:</label>
                   </div>
                   <div class="col-6">
-                    <input type="text" class="form-control" formControlName="searchText" id="searchText" aria-describedby="searchText" placeholder="Name">
+                    <input type="text" class="form-control" (input)="applyFilter($event.target.value)" [(ngModel)]="searchText" id="searchText" aria-describedby="searchText" placeholder="Name">
                   </div>
                 </div>
                 <div class="row mt-4">
@@ -37,7 +36,6 @@
                   </div>
                 </div>
               </div>
-            </form>
           </div>
           <div class="card-footer">
             <div class="text-center">

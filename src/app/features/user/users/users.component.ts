@@ -80,9 +80,9 @@ export class AccountInfoComponent implements OnInit, AfterViewInit {
 
   get g() { return this.updateForm.controls; }
 
-  applyFilter() {
-    if (this.searchText !== null || this.searchText !== '') {
-      this.results = this.results.filter(option => option.friendlyName.toLowerCase().startsWith(this.searchText));
+  applyFilter(event) {
+    if ((this.searchText !== null || this.searchText !== '') && event.length > 0) {
+      this.results = this.results.filter(s => s.friendlyName.toLowerCase().includes(this.searchText.toLowerCase()));
     } else {
       this.results = this.data.result;
     }

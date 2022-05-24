@@ -13,7 +13,7 @@
                     <label>Name:</label>
                   </div>
                   <div class="col-6">
-                    <input type="text" class="form-control" [(ngModel)]="searchText" (keyup)="applyFilter()"  formControlName="searchText" id="searchText" aria-describedby="searchText" placeholder="Name">
+                    <input type="text" class="form-control" [(ngModel)]="searchText" (input)="applyFilter($event.target.value)" id="searchText" aria-describedby="searchText" placeholder="Name">
                   </div>
                 </div>
                 <div class="row mt-4">

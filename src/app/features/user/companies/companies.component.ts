@@ -75,9 +75,9 @@ export class CompaniesComponent implements OnInit , AfterViewInit {
 
   get g() { return this.updateForm.controls; }
 
-  applyFilter() {
-    if (this.searchText !== null || this.searchText !== '') {
-      this.results = this.results.filter(option => option.name.toLowerCase().startsWith(this.searchText));
+  applyFilter(event) {
+    if ((this.searchText !== null || this.searchText !== '') && event.length > 0) {
+      this.results = this.results.filter(s => s.name.toLowerCase().includes(this.searchText.toLowerCase()));
     } else {
       this.results = this.data.result;
     }
@@ -146,11 +146,7 @@ export class CompaniesComponent implements OnInit , AfterViewInit {
   }
 
   search() {
-    return this.results.filter(s => {
-      return s.friendlyName.toLowerCase().startsWith(
-        this.searchText.toLowerCase()
-      );
-    });
+    return this.results.filter(s => s.name.toLowerCase().includes(this.searchText.toLowerCase()))
   }
 
   exportToCsv() {
