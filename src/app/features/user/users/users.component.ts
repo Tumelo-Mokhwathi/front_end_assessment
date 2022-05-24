@@ -170,7 +170,7 @@ export class AccountInfoComponent implements OnInit, AfterViewInit {
       decimalSeparator: '.',
       showLabels: true,
       showTitle: true,
-      title: 'File',
+      title: 'Users',
       useTextFile: false,
       useBom: true,
       useKeysAsHeaders: true,

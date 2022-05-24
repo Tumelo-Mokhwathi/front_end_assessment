@@ -156,7 +156,7 @@ export class CompaniesComponent implements OnInit , AfterViewInit {
       decimalSeparator: '.',
       showLabels: true,
       showTitle: true,
-      title: 'File',
+      title: 'Companies',
       useTextFile: false,
       useBom: true,
       useKeysAsHeaders: true,
